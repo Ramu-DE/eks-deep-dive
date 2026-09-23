@@ -1,0 +1,10 @@
+flowchart TB
+    Org[Organizations, accounts, SCPs] --> IAM[IAM Identity Center, roles, CAM]
+    IAM --> API[Private or restricted EKS API and RBAC]
+    API --> Admission[Pod Security Admission and policy as code]
+    Admission --> Workload[Hardened workload]
+    Workload --> Network[NetworkPolicy, security groups, TLS]
+    Workload --> Identity[Pod Identity least privilege]
+    Workload --> Data[KMS, external secrets, encrypted storage]
+    Workload --> Runtime[GuardDuty and runtime detection]
+    Runtime --> Audit[Audit logs, CloudTrail, incident response]

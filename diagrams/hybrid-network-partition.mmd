@@ -1,0 +1,8 @@
+flowchart LR
+    CP[EKS control plane in AWS] <-->|WAN, VPN, or Direct Connect| Site[Hybrid node site]
+    Site --> Pods[Existing Pods]
+    Pods --> Local[Local DNS, data, and services]
+    Pods --> Remote[Remote AWS dependencies]
+    Partition[Network partition] -.blocks.-> CP
+    Partition -.may block.-> Remote
+    Local --> Continue[Locally self-sufficient service can continue]

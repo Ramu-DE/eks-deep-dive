@@ -1,0 +1,16 @@
+sequenceDiagram
+    participant U as Workload controller
+    participant A as Kubernetes API
+    participant S as Scheduler
+    participant C as EBS CSI
+    participant E as Amazon EBS
+    participant K as Kubelet
+
+    U->>A: Create PVC and Pod
+    S->>A: Choose node and AZ
+    C->>A: Observe selected topology
+    C->>E: Create encrypted GP3 volume
+    E-->>C: Volume available in selected AZ
+    C->>E: Attach volume to node
+    K->>K: Format and mount
+    K-->>A: Pod running

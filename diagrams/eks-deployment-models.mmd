@@ -1,0 +1,8 @@
+flowchart TD
+    Need[Where must Kubernetes run?] --> Cloud{AWS Region acceptable?}
+    Cloud -->|Yes| EKS[EKS in AWS Cloud]
+    EKS --> Manage{Desired management model?}
+    Manage -->|Integrated data-plane automation| Auto[EKS Auto Mode]
+    Manage -->|More component-level control| Standard[EKS Standard]
+    Cloud -->|AWS control plane plus external compute| Hybrid[EKS Hybrid Nodes]
+    Cloud -->|Customer-controlled cluster infrastructure| Anywhere[EKS Anywhere]

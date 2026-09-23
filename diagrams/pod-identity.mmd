@@ -1,0 +1,17 @@
+sequenceDiagram
+    participant P as Application Pod
+    participant S as AWS SDK
+    participant A as Pod Identity component
+    participant E as EKS identity service
+    participant T as AWS STS
+    participant D as DynamoDB
+
+    P->>S: PutItem
+    S->>A: Request container credentials
+    A->>E: Present Pod identity token
+    E->>T: Assume associated IAM role
+    T-->>E: Temporary credentials
+    E-->>A: Scoped credentials
+    A-->>S: Rotating credentials
+    S->>D: SigV4-signed PutItem
+    D-->>S: IAM-authorized response

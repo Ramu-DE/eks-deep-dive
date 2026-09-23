@@ -1,0 +1,10 @@
+flowchart TB
+    Total[Total EKS workload cost] --> Cluster[Cluster fee and support tier]
+    Total --> Auto[Auto Mode charges]
+    Total --> Capability[EKS Capability charges]
+    Total --> Hybrid[Hybrid Node vCPU charges]
+    Total --> Compute[EC2 or Fargate]
+    Total --> Storage[EBS, EFS, FSx, snapshots]
+    Total --> Network[IPv4, NAT, ELB, data transfer]
+    Total --> Observe[Logs, metrics, traces]
+    Total --> App[AWS application services]

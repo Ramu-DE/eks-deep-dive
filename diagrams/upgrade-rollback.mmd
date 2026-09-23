@@ -1,0 +1,12 @@
+flowchart LR
+    Calendar[Release calendar] --> Inventory[APIs, add-ons, nodes, webhooks, clients]
+    Inventory --> Insights[Upgrade Readiness Insights]
+    Insights --> Test[Test and recovery validation]
+    Test --> Upgrade[Upgrade control plane]
+    Upgrade --> Bake[Bake period]
+    Bake --> Platform[Add-ons, clients, nodes]
+    Bake --> Problem{Serious issue?}
+    Problem -->|No| Validate[Complete validation]
+    Problem -->|Yes, eligible window| Rollback[Rollback Readiness Insights]
+    Rollback --> Revert[Node/control-plane rollback]
+    Revert --> Validate
