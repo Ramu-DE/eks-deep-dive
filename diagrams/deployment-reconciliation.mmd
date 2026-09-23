@@ -1,0 +1,23 @@
+sequenceDiagram
+    participant U as User
+    participant A as API server
+    participant E as etcd
+    participant C as Controllers
+    participant S as Scheduler
+    participant K as Managed Karpenter
+    participant N as Kubelet
+
+    U->>A: Create Deployment
+    A->>A: Authenticate, authorize, admit
+    A->>E: Store desired state
+    C->>A: Create ReplicaSet and Pod
+    S->>A: Find suitable node
+    alt No available capacity
+      K->>A: Observe unschedulable Pod
+      K->>K: Select instance type and AZ
+      K-->>A: Register node
+    end
+    S->>A: Bind Pod to node
+    N->>A: Watch assigned Pod
+    N->>N: Pull image and start container
+    N-->>A: Report readiness

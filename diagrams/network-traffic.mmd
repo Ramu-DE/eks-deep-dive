@@ -1,0 +1,17 @@
+flowchart LR
+    Client[Internet client] --> DNS[DNS]
+    DNS --> ALB[ALB HTTPS listener]
+    ALB --> TG[IP target group]
+    TG --> UI[UI Pod VPC IP]
+    UI --> SVC[Catalog Service ClusterIP]
+    SVC --> EP[EndpointSlice]
+    EP --> Catalog[Catalog Pod VPC IP]
+    Catalog --> AWSAPI[AWS API or data service]
+
+    subgraph PrivateSubnets[Private subnets]
+      UI
+      Catalog
+    end
+
+    PrivateSubnets --> NAT[NAT Gateway]
+    NAT --> IGW[Internet Gateway]

@@ -1,0 +1,11 @@
+flowchart TB
+    Client[Application client] --> Decision{Protocol and routing need}
+    Decision -->|HTTP/HTTPS host or path routing| Ingress[Ingress]
+    Ingress --> ALB[Application Load Balancer]
+    ALB --> ALBTG[IP target group]
+    ALBTG --> WebPods[Ready web Pods]
+
+    Decision -->|TCP/UDP or L4 performance| Service[Service type LoadBalancer]
+    Service --> NLB[Network Load Balancer]
+    NLB --> NLBTG[Target group]
+    NLBTG --> NetworkPods[Ready application Pods]

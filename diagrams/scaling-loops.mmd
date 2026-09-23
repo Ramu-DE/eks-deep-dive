@@ -1,0 +1,10 @@
+flowchart LR
+    Demand[Demand] --> HPA[HPA or event-driven scaler]
+    Metrics[Metrics pipeline] --> HPA
+    HPA --> Pods[More Pod replicas]
+    VPA[VPA requests/recommendations] --> Pods
+    Pods --> Capacity{Node capacity available?}
+    Capacity -->|Yes| Running[Schedule Pods]
+    Capacity -->|No| NodeScaler[Auto Mode, Karpenter, or Cluster Autoscaler]
+    NodeScaler --> Nodes[Provision/scale nodes]
+    Nodes --> Running

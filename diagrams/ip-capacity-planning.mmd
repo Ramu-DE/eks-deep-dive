@@ -1,0 +1,9 @@
+flowchart TD
+    Alert[Low subnet IP headroom] --> Measure[Measure active, warm, fragmented, and reserved use]
+    Measure --> Waste{Over-allocation?}
+    Waste -->|Yes| Tune[Tune warm pool, node shape, rollout surge]
+    Waste -->|No| Expand{Can VPC/subnets expand?}
+    Expand -->|Yes| CIDR[Add CIDR/subnets and discovery]
+    Expand -->|No| Strategy{Long-term design}
+    Strategy --> IPv6[Adopt EKS IPv6]
+    Strategy --> Custom[Use custom networking when justified]

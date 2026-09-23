@@ -1,0 +1,25 @@
+# Sensitive or local configuration
+.env
+.env.*
+*.pem
+*.key
+*.crt
+kubeconfig*
+.aws/
+.kube/
+
+# Terraform state and local cache
+*.tfstate
+*.tfstate.*
+.terraform/
+crash.log
+
+# Raw command output must be manually sanitized first
+raw-output/
+*.raw.log
+
+# Generated/editor files
+.DS_Store
+.idea/
+.vscode/
+*.swp

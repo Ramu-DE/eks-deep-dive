@@ -1,0 +1,11 @@
+flowchart TB
+    EKS[Amazon EKS] --> EC2[Amazon EC2 compute]
+    EKS --> EBS[Amazon EBS block storage]
+    EKS --> ECR[Amazon ECR images]
+    EKS --> CW[Amazon CloudWatch observability]
+    EKS --> AMP[Amazon Managed Service for Prometheus]
+    EKS --> ELB[Elastic Load Balancing]
+    EKS --> GD[Amazon GuardDuty threat detection]
+    EKS --> RH[AWS Resilience Hub assessment]
+    IAM[AWS IAM] --> EKS
+    VPC[Amazon VPC] --> EKS

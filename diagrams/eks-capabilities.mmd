@@ -1,0 +1,10 @@
+flowchart LR
+    Engineer[Platform engineer] --> CR[Kubernetes custom resource]
+    CR --> API[Kubernetes API]
+    API --> Capability{EKS managed capability}
+    Capability --> Argo[Argo CD]
+    Capability --> ACK[ACK]
+    Capability --> KRO[kro]
+    Argo --> Git[Reconcile desired state from Git]
+    ACK --> AWS[AWS resource lifecycle]
+    KRO --> Graph[Composed Kubernetes resource graph]

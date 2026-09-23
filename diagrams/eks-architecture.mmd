@@ -1,0 +1,15 @@
+flowchart TB
+    Admin[Administrator or CI] -->|AWS API| AWS[AWS management plane]
+    Admin -->|kubectl HTTPS 443| API[Kubernetes API server]
+    AWS --> EKS[EKS service]
+    EKS --> API
+    API <--> ETCD[(etcd)]
+    Scheduler[Scheduler] --> API
+    Controllers[Controller managers] --> API
+    API --> Kubelet[Kubelet]
+    Karpenter[Managed Karpenter] --> API
+    Karpenter --> EC2[EC2 capacity]
+    EC2 --> Node[Auto Mode Bottlerocket node]
+    Node --> Kubelet --> Pod[Application Pod]
+    User[Application user] --> ELB[ALB or NLB] --> Pod
+    Pod --> Storage[EBS or AWS data service]

@@ -1,0 +1,9 @@
+flowchart LR
+    Data[Training and serving data] --> Store[S3, FSx, EFS, OpenZFS]
+    Store --> Train[Training or fine-tuning]
+    Train --> Artifact[Model and checkpoint]
+    Artifact --> Cache[Node or local model cache]
+    Cache --> Serve[CPU, GPU, Inferentia, or Trainium inference]
+    Serve --> Metrics[Latency, tokens, utilization, memory, power]
+    Metrics --> Scale[Pod and accelerator scaling]
+    Scale --> Serve

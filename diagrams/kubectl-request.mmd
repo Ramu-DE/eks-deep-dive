@@ -1,0 +1,20 @@
+sequenceDiagram
+    participant K as kubectl
+    participant C as AWS credential plugin
+    participant STS as AWS STS
+    participant A as EKS API server
+    participant E as EKS access entry
+    participant R as Access policy or RBAC
+    participant D as etcd
+
+    K->>C: aws eks get-token
+    C->>STS: Sign caller identity
+    STS-->>C: Short-lived material
+    C-->>K: Bearer token
+    K->>A: HTTPS request
+    A->>E: Authenticate IAM principal
+    E-->>A: Kubernetes identity
+    A->>R: Authorize verb/resource
+    R-->>A: Allow or deny
+    A->>D: Read or write object
+    A-->>K: API response
